@@ -1,13 +1,13 @@
 ## Introduction
 This project is a toy implementation of [Ken Thompson's paper "Reflections on Trusting Trust" [1]](https://doi.org/10.1145/358198.358210).
 
-`quine.c` is a simple self-reproducing program. It illustrates the self-reproduction idea that `infected_compiler.c` later uses. The source string contains a `%s` placeholder that prints the string itself. To avoid the escaping of quotes, newlines and other special characters inside the string, `%c` placeholders populated with their ASCII integer values (e.g., `34` for `"` and `10` for a newline) are used. I learned how to write such programs from [this blog [2]](https://firexfly.com/quines/).
-`check_password.c` is a toy program that we will backdoor as a stand-in for the UNIX `login` command, as in the paper.
-`clean_compiler.c` is a wrapper around `gcc`. We will alter it rather than modifying `gcc` internals.
-`infected_compiler.c` is the malicious compiler. It can:
-- backdoor `check_password.c` by adding `ken` as a valid password
-- modify `clean_compiler.c` by replacing the clean source code with its own malicious logic (self-replication)
-- act as a normal wrapper around `gcc` for any other files
+- `quine.c` is a simple self-reproducing program. It illustrates the self-reproduction idea that `infected_compiler.c` later uses. The source string contains a `%s` placeholder that prints the string itself. To avoid the escaping of quotes, newlines and other special characters inside the string, `%c` placeholders populated with their ASCII integer values (e.g., `34` for `"` and `10` for a newline) are used. I learned how to write such programs from [this blog [2]](https://firexfly.com/quines/).
+- `check_password.c` is a toy program that we will backdoor as a stand-in for the UNIX `login` command, as in the paper.
+- `clean_compiler.c` is a wrapper around `gcc`. We will alter it rather than modifying `gcc` internals.
+- `infected_compiler.c` is the malicious compiler. It can:
+  - backdoor `check_password.c` by adding `ken` as a valid password
+  - modify `clean_compiler.c` by replacing the clean source code with its own malicious logic (self-replication)
+  - act as a normal wrapper around `gcc` for any other files
 
 _Note: To avoid writing intermediate malicious source files to disk, this implementation pipes the generated altered source code into `gcc` via standard input._
 
@@ -40,5 +40,5 @@ You can delete `infected_compiler.c`. If you audit `clean_compiler.c` and `check
 ## References
 1. Ken Thompson, "Reflections on Trusting Trust", Communications of the ACM, 27(8), 761–763, 1984.  
 DOI: [10.1145/358198.358210](https://doi.org/10.1145/358198.358210)
-2. firexfly, "Writing programs that write themselves".
+2. firexfly, "Writing programs that write themselves".  
 Link: [firexfly.com/quines/](https://firexfly.com/quines/)
