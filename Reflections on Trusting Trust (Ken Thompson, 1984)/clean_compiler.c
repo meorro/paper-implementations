@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
-        printf("Usage: ./clean_compiler <source.c> <output_executable>\n");
+        printf("Usage: %s <source.c> <output_executable>\n", argv[0]);
         return 1;
     }
 

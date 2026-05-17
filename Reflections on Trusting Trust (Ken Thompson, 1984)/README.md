@@ -1,7 +1,7 @@
 ## Introduction
-This project is a toy implementation of [Ken Thompson's paper "Reflections on Trusting Trust" [1]](https://doi.org/10.1145/358198.358210).
+This project is a toy implementation of [Ken Thompson's paper "Reflections on Trusting Trust"](https://doi.org/10.1145/358198.358210) [[1]](#thompson_paper).
 
-- `quine.c` is a simple self-reproducing program. It illustrates the self-reproduction idea that `infected_compiler.c` later uses. The source string contains a `%s` placeholder that prints the string itself. To avoid the escaping of quotes, newlines and other special characters inside the string, `%c` placeholders populated with their ASCII integer values (e.g., `34` for `"` and `10` for a newline) are used. I learned how to write such programs from [this blog [2]](https://firexfly.com/quines/).
+- `quine.c` is a simple self-reproducing program. It illustrates the self-reproduction idea that `infected_compiler.c` later uses. The source string contains a `%s` placeholder that prints the string itself. To avoid the escaping of quotes, newlines and other special characters inside the string, `%c` placeholders populated with their ASCII integer values (e.g., `34` for `"` and `10` for a newline) are used. I learned how to write such programs from [this blog](https://firexfly.com/quines/) [[2]](#firexfly_blog).
 - `check_password.c` is a toy program that we will backdoor as a stand-in for the UNIX `login` command, as in the paper.
 - `clean_compiler.c` is a wrapper around `gcc`. We will alter it rather than modifying `gcc` internals.
 - `infected_compiler.c` is the malicious compiler. It can:
@@ -38,7 +38,7 @@ Access granted!
 You can delete `infected_compiler.c`. If you audit `clean_compiler.c` and `check_password.c`, you will find no malicious code. Yet, the `clean_compiler` binary is compromised and will reproduce the backdoor whenever it recompiles those files. This shows the limits of source-level verification when the build toolchain itself is part of the attack.
 
 ## References
-1. Ken Thompson, "Reflections on Trusting Trust", Communications of the ACM, 27(8), 761–763, 1984.  
-DOI: [10.1145/358198.358210](https://doi.org/10.1145/358198.358210)
-2. firexfly, "Writing programs that write themselves".  
+1. <a id="thompson_paper"></a>Ken Thompson, "Reflections on Trusting Trust", Communications of the ACM, 27(8), 761–763, 1984.  
+DOI: [10.1145/358198.358210](https://doi.org/10.1145/358198.358210)  
+2. <a id="firexfly_blog"></a>firexfly, "Writing programs that write themselves".  
 Link: [firexfly.com/quines/](https://firexfly.com/quines/)
